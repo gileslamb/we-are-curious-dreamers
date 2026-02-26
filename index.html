@@ -14,8 +14,6 @@
     --deep-gold: #D4870A;
     --black: #0A0A0A;
     --off-white: #F2EDE4;
-    --cream: #FDF8F0;
-    --dark-gray: #1A1A1A;
     --mid-gray: #888;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-mono: 'DM Mono', monospace;
@@ -105,27 +103,7 @@
   }
   .nav-links a:hover { opacity: 1; color: var(--gold); }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,168,0,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 40% at 20% 80%, rgba(245,168,0,0.04) 0%, transparent 50%);
-  }
-
-  /* Animated grain overlay */
+  /* Grain overlay */
   .grain {
     position: fixed;
     inset: -50%;
@@ -145,17 +123,43 @@
     80%{transform:translate(3%,35%)} 90%{transform:translate(-10%,10%)}
   }
 
-  .hero-eyebrow {
+  .section-label {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s 0.2s forwards;
+    margin-bottom: 1rem;
+    display: block;
   }
 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,168,0,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 40% at 20% 80%, rgba(245,168,0,0.04) 0%, transparent 50%);
+  }
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(4rem, 10vw, 10rem);
@@ -166,65 +170,22 @@
     opacity: 0;
     animation: fadeUp 1s 0.4s forwards;
   }
-
   .hero-title em {
     font-style: italic;
     color: var(--gold);
     display: block;
   }
-
   .hero-sub {
     font-size: clamp(1rem, 2vw, 1.4rem);
     font-weight: 400;
     font-style: italic;
     color: rgba(242,237,228,0.6);
-    max-width: 500px;
-    line-height: 1.6;
+    max-width: 560px;
+    line-height: 1.7;
     margin-bottom: 3rem;
     opacity: 0;
     animation: fadeUp 1s 0.6s forwards;
   }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 1s 0.8s forwards;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--gold);
-    color: var(--black);
-    border: none;
-    padding: 1rem 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.3s, transform 0.3s;
-    cursor: none;
-  }
-  .btn-primary:hover { background: var(--deep-gold); transform: translateY(-2px); }
-
-  .btn-ghost {
-    border: 1px solid rgba(242,237,228,0.3);
-    color: var(--off-white);
-    padding: 1rem 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    transition: border-color 0.3s, color 0.3s, transform 0.3s;
-    cursor: none;
-  }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
   .hero-scroll {
     position: absolute;
     bottom: 3rem;
@@ -254,902 +215,244 @@
     0%,100%{opacity:0.3; transform:scaleY(1)} 50%{opacity:1; transform:scaleY(0.5) translateY(-10px)}
   }
 
-  /* Floating brains decoration */
-  .float-elements {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    opacity: 0.15;
-    pointer-events: none;
-    animation: fadeIn 2s 1s forwards;
-  }
-  .float-el {
-    width: 80px;
-    height: 80px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: floatBob 6s ease-in-out infinite;
-    opacity: 0.4;
-  }
-  .float-el:nth-child(2) { animation-delay: 1s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-  .float-el:nth-child(3) { animation-delay: 2s; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  .float-el:nth-child(4) { animation-delay: 3s; }
-  @keyframes floatBob {
-    0%,100%{transform: translateY(0) rotate(0deg)}
-    50%{transform: translateY(-20px) rotate(5deg)}
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* SECTION STYLES */
-  section {
-    position: relative;
-  }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-
-  /* FEATURED EVENT */
-  .featured-event {
+  /* Buttons */
+  .btn-primary {
     background: var(--gold);
     color: var(--black);
-    padding: 6rem 3rem;
-    overflow: hidden;
-    position: relative;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s, transform 0.3s;
+    cursor: none;
   }
-  .featured-event::before {
-    content: 'BRAVE//BROKEN';
-    position: absolute;
-    font-family: var(--font-impact);
-    font-size: 20vw;
-    color: rgba(0,0,0,0.07);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    white-space: nowrap;
-    pointer-events: none;
-    letter-spacing: -0.02em;
+  .btn-primary:hover { background: var(--deep-gold); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1px solid rgba(242,237,228,0.3);
+    color: var(--off-white);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.3s, color 0.3s, transform 0.3s;
+    cursor: none;
   }
-  .featured-inner {
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* DISTANCE TO THE MOON */
+  .album-section {
+    padding: 8rem 3rem;
+    background: var(--black);
     position: relative;
-    max-width: 1400px;
+    overflow: visible;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .album-inner {
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
   }
-  .featured-tag {
-    display: inline-block;
-    background: var(--black);
-    color: var(--gold);
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    margin-bottom: 2rem;
-  }
-  .featured-title {
-    font-family: var(--font-impact);
-    font-size: clamp(4rem, 8vw, 8rem);
-    line-height: 0.9;
-    color: var(--black);
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-  }
-  .featured-desc {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(10,10,10,0.75);
-    margin-bottom: 2rem;
-    max-width: 480px;
-  }
-  .featured-meta {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  .meta-label {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(10,10,10,0.5);
-  }
-  .meta-value {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--black);
-  }
-  .featured-speakers {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .speaker-card {
-    background: rgba(0,0,0,0.08);
-    padding: 1rem 1.5rem;
+  .album-artwork {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-height: min(75vh, 600px);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-left: 3px solid var(--black);
-    transition: background 0.3s, transform 0.3s;
+    justify-content: center;
   }
-  .speaker-card:hover { background: rgba(0,0,0,0.15); transform: translateX(5px); }
-  .speaker-num {
-    font-family: var(--font-impact);
-    font-size: 2rem;
-    color: rgba(0,0,0,0.2);
-    min-width: 40px;
+  .album-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
-  .speaker-info { flex: 1; }
-  .speaker-name {
+  .album-content {
+    max-width: 520px;
+  }
+  .album-title {
     font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--black);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 1.5rem;
   }
-  .speaker-role {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    color: rgba(0,0,0,0.5);
-    text-transform: uppercase;
+  .album-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(242,237,228,0.8);
+    margin-bottom: 2rem;
+  }
+  .album-body p {
+    margin-bottom: 1.25rem;
+  }
+  .album-body p:last-of-type { margin-bottom: 0; }
+  .album-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
   }
 
-  /* EVENTS DIARY */
-  .events-section {
+  /* WHAT WE ARE */
+  .manifesto-section {
     padding: 6rem 3rem;
-    background: var(--dark-gray);
-  }
-  .events-header {
-    max-width: 1400px;
-    margin: 0 auto 4rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .events-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-  .event-card {
-    background: var(--dark-gray);
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    cursor: none;
-    transition: background 0.4s;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-  .event-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s;
-  }
-  .event-card:hover { background: #222; }
-  .event-card:hover::after { transform: scaleX(1); }
-
-  .event-date-block {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .event-day {
-    font-family: var(--font-impact);
-    font-size: 3.5rem;
-    color: var(--gold);
-    line-height: 1;
-  }
-  .event-month-year {
-    display: flex;
-    flex-direction: column;
-  }
-  .event-month {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--off-white);
-  }
-  .event-year {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--mid-gray);
-  }
-  .event-type {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .event-type::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .event-name {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 0.75rem;
-    color: var(--off-white);
-  }
-  .event-desc {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    line-height: 1.7;
-    color: var(--mid-gray);
-    margin-bottom: 1.5rem;
-  }
-  .event-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .event-location {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: var(--mid-gray);
-    text-transform: uppercase;
-  }
-  .event-cta {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: gap 0.3s;
-  }
-  .event-cta:hover { gap: 0.8rem; }
-  .event-cta::after { content: '→'; }
-  .event-free-badge {
-    position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    background: rgba(245,168,0,0.12);
-    border: 1px solid rgba(245,168,0,0.3);
-    color: var(--gold);
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.6rem;
-  }
-
-  /* ABOUT / MANIFESTO */
-  .manifesto {
-    padding: 8rem 3rem;
     background: var(--black);
-    position: relative;
-    overflow: hidden;
-  }
-  .manifesto::before {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border: 1px solid rgba(245,168,0,0.08);
-    border-radius: 50%;
-    top: -200px;
-    right: -200px;
-    pointer-events: none;
-  }
-  .manifesto::after {
-    content: '';
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border: 1px solid rgba(245,168,0,0.05);
-    border-radius: 50%;
-    bottom: -150px;
-    left: -100px;
-    pointer-events: none;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
   .manifesto-inner {
-    max-width: 1400px;
+    max-width: 720px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 6rem;
-    align-items: start;
-    position: relative;
   }
-  .manifesto-left { position: sticky; top: 8rem; }
-  .manifesto-quote {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-  .manifesto-attribution {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid-gray);
-  }
-  .manifesto-right {}
   .manifesto-body {
     font-size: 1.15rem;
-    line-height: 1.9;
+    line-height: 1.95;
+    color: rgba(242,237,228,0.75);
+  }
+  .manifesto-body p {
+    margin-bottom: 1.5rem;
+  }
+  .manifesto-body p:last-child { margin-bottom: 0; }
+
+  /* WORK WITH US */
+  .work-section {
+    padding: 6rem 3rem;
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .work-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .work-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
     color: rgba(242,237,228,0.75);
     margin-bottom: 2rem;
   }
-  .manifesto-body strong { color: var(--off-white); font-weight: 700; }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .pillar {
-    border-top: 1px solid rgba(245,168,0,0.3);
-    padding-top: 1.5rem;
-  }
-  .pillar-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .pillar-name {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--off-white);
-  }
-  .pillar-desc {
+  .work-email {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    line-height: 1.7;
-    color: var(--mid-gray);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
   }
+  .work-email a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .work-email a:hover { opacity: 0.85; }
 
-  /* BOOKING / DONATE */
-  .booking-section {
-    background: var(--cream);
-    color: var(--black);
+  /* STAY CONNECTED */
+  .connect-section {
     padding: 6rem 3rem;
-    position: relative;
-    overflow: hidden;
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
-  .booking-section::before {
-    content: 'JOIN US';
-    position: absolute;
-    font-family: var(--font-impact);
-    font-size: 25vw;
-    color: rgba(0,0,0,0.03);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-  .booking-inner {
-    max-width: 1400px;
+  .connect-inner {
+    max-width: 480px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    position: relative;
-  }
-  .booking-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    color: var(--black);
-  }
-  .booking-title em { font-style: italic; color: var(--deep-gold); }
-  .booking-desc {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: rgba(10,10,10,0.65);
-    margin-bottom: 2.5rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-  .form-label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(10,10,10,0.5);
-    margin-bottom: 0.5rem;
-  }
-  .form-input, .form-select {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(10,10,10,0.2);
-    padding: 0.75rem 0;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--black);
-    outline: none;
-    transition: border-color 0.3s;
-    appearance: none;
-    cursor: none;
-  }
-  .form-input:focus, .form-select:focus { border-color: var(--deep-gold); }
-  .form-input::placeholder { color: rgba(10,10,10,0.3); }
-
-  .btn-dark {
-    background: var(--black);
-    color: var(--gold);
-    border: none;
-    padding: 1.1rem 3rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: none;
-    transition: background 0.3s, transform 0.3s;
-    display: inline-block;
-  }
-  .btn-dark:hover { background: #111; transform: translateY(-2px); }
-
-  /* Donate panel */
-  .donate-panel {
-    background: var(--black);
-    color: var(--off-white);
-    padding: 3rem;
-  }
-  .donate-title {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--gold);
-  }
-  .donate-desc {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    line-height: 1.8;
-    color: rgba(242,237,228,0.6);
-    margin-bottom: 2rem;
-  }
-  .donate-amounts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  .donate-amount {
-    border: 1px solid rgba(245,168,0,0.3);
-    padding: 1rem;
     text-align: center;
-    cursor: none;
-    transition: background 0.3s, border-color 0.3s;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--off-white);
   }
-  .donate-amount:hover, .donate-amount.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--black);
+  .connect-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(242,237,228,0.75);
+    margin-bottom: 1.5rem;
   }
-  .donate-impact {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: rgba(242,237,228,0.4);
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .donate-custom {
+  .connect-form {
     display: flex;
     gap: 0;
-    margin-bottom: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
   }
-  .donate-prefix {
-    background: rgba(245,168,0,0.1);
-    border: 1px solid rgba(245,168,0,0.2);
-    padding: 0.75rem 1rem;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--gold);
-    border-right: none;
-  }
-  .donate-input {
+  .connect-input {
     flex: 1;
     background: transparent;
-    border: 1px solid rgba(245,168,0,0.2);
-    padding: 0.75rem 1rem;
+    border: 1px solid rgba(242,237,228,0.2);
+    border-right: none;
+    padding: 1rem 1.25rem;
     font-family: var(--font-display);
     font-size: 1rem;
     color: var(--off-white);
     outline: none;
   }
-  .donate-input:focus { border-color: var(--gold); }
-  .donate-input::placeholder { color: rgba(242,237,228,0.3); }
-
-  /* NEWSLETTER */
-  .newsletter {
+  .connect-input::placeholder { color: rgba(242,237,228,0.3); }
+  .connect-input:focus { border-color: var(--gold); }
+  .connect-btn {
     background: var(--gold);
     color: var(--black);
-    padding: 5rem 3rem;
-    text-align: center;
-  }
-  .newsletter-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
-    margin-bottom: 1rem;
-  }
-  .newsletter-sub {
-    font-size: 1rem;
-    font-style: italic;
-    opacity: 0.7;
-    margin-bottom: 2.5rem;
-  }
-  .newsletter-form {
-    display: flex;
-    max-width: 500px;
-    margin: 0 auto;
-    gap: 0;
-  }
-  .newsletter-input {
-    flex: 1;
-    background: rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.2);
-    border-right: none;
+    border: 1px solid var(--gold);
     padding: 1rem 1.5rem;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--black);
-    outline: none;
-  }
-  .newsletter-input::placeholder { color: rgba(0,0,0,0.4); }
-  .newsletter-btn {
-    background: var(--black);
-    color: var(--gold);
-    border: none;
-    padding: 1rem 2rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: none;
     transition: background 0.3s;
-    white-space: nowrap;
   }
-  .newsletter-btn:hover { background: #111; }
+  .connect-btn:hover { background: var(--deep-gold); }
 
   /* FOOTER */
   footer {
-    background: var(--dark-gray);
-    padding: 4rem 3rem 2rem;
+    background: var(--black);
+    padding: 4rem 3rem 3rem;
     border-top: 1px solid rgba(255,255,255,0.05);
   }
   .footer-inner {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 3rem;
-  }
-  .footer-brand-name {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .footer-tagline {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    line-height: 1.8;
-    color: var(--mid-gray);
-    margin-bottom: 1.5rem;
-  }
-  .footer-col-title {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-  }
-  .footer-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .footer-links a {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--mid-gray);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--off-white); }
-  .footer-bottom {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .footer-copy {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: rgba(136,136,136,0.5);
-  }
-
-  /* MODAL */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s;
-    padding: 2rem;
-  }
-  .modal-overlay.active { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--dark-gray);
-    max-width: 580px;
-    width: 100%;
-    padding: 3rem;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.4s;
-    border-top: 3px solid var(--gold);
-  }
-  .modal-overlay.active .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--mid-gray);
-    font-size: 1.5rem;
-    cursor: none;
-    transition: color 0.3s;
-    line-height: 1;
-  }
-  .modal-close:hover { color: var(--gold); }
-  .modal-event-tag {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-  .modal-title {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--off-white);
-    margin-bottom: 1.5rem;
-  }
-  .modal-form .form-input {
-    color: var(--off-white);
-    border-color: rgba(255,255,255,0.15);
-  }
-  .modal-form .form-input::placeholder { color: rgba(255,255,255,0.2); }
-  .modal-form .form-input:focus { border-color: var(--gold); }
-  .modal-form .form-label { color: rgba(255,255,255,0.4); }
-  .free-note {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: rgba(245,168,0,0.7);
-    margin-top: 1rem;
     text-align: center;
   }
-
-  /* Ticker tape */
-  .ticker {
-    background: var(--gold);
-    padding: 0.6rem 0;
-    overflow: hidden;
-    white-space: nowrap;
+  .footer-names {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 0.5rem;
   }
-  .ticker-inner {
-    display: inline-block;
-    animation: ticker 30s linear infinite;
-  }
-  .ticker-inner span {
+  .footer-location {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--black);
-    padding: 0 3rem;
-  }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* LAUNCH EVENT */
-  .launch-event {
-    background: var(--black);
-    padding: 8rem 3rem 8rem;
-    position: relative;
-    overflow: visible;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-  }
-  .launch-inner {
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: center;
-    min-height: 60vh;
-  }
-  .launch-artwork {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    max-height: min(95vh, 1100px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    order: 2;
-  }
-  .launch-artwork img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-  }
-  .launch-content {
-    position: relative;
-    max-width: 520px;
-    order: 1;
-  }
-  .launch-event .section-label {
-    margin-bottom: 0.75rem;
-  }
-  .launch-title {
-    font-family: var(--font-display);
-    font-size: clamp(3.5rem, 7vw, 6.5rem);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--off-white);
-    margin-bottom: 1.5rem;
-    text-shadow: 0 2px 40px rgba(0,0,0,0.8);
-    position: relative;
-    z-index: 1;
-  }
-  .launch-title em { font-style: italic; color: var(--gold); }
-  .launch-desc {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(242,237,228,0.75);
-    max-width: 520px;
+    color: var(--mid-gray);
     margin-bottom: 2rem;
   }
-  .launch-meta {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .launch-event .meta-label {
+  .footer-children {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     color: rgba(242,237,228,0.5);
   }
-  .launch-event .meta-value {
-    color: var(--off-white);
-  }
-  .launch-event .meta-value:first-of-type { color: var(--gold); }
-  .launch-urgency {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+  .footer-children a {
     color: var(--gold);
-    margin-bottom: 1rem;
-    opacity: 0.9;
+    text-decoration: none;
+    transition: opacity 0.3s;
   }
+  .footer-children a:hover { opacity: 0.85; }
 
   /* Responsive */
   @media (max-width: 900px) {
     nav { padding: 1.5rem 1.5rem; }
     .nav-links { display: none; }
     .hero { padding: 8rem 1.5rem 4rem; }
-    .float-elements { display: none; }
-    .manifesto-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .manifesto-left { position: static; }
-    .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .pillars { grid-template-columns: 1fr; }
-    .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .events-section { padding: 4rem 1.5rem; }
-    .launch-event { padding: 4rem 1.5rem; }
-    .launch-event { min-height: auto; padding: 5rem 1.5rem; }
-    .launch-inner { grid-template-columns: 1fr; gap: 2rem; min-height: auto; }
-    .launch-artwork { order: -1; max-height: min(85vw, 500px); }
-    .launch-content { max-width: 100%; }
-    .manifesto { padding: 4rem 1.5rem; }
-    .booking-section { padding: 4rem 1.5rem; }
+    .album-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .album-artwork { order: -1; max-height: min(70vw, 400px); }
+    .album-content { max-width: 100%; }
+    .manifesto-section, .work-section, .connect-section { padding: 4rem 1.5rem; }
+    .connect-form { flex-direction: column; }
+    .connect-input { border-right: 1px solid rgba(242,237,228,0.2); }
   }
 </style>
 </head>
@@ -1161,388 +464,90 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">We Are Curious Dreamers</a>
+  <a href="#home" class="nav-logo">We Are Curious Dreamers</a>
   <ul class="nav-links">
-    <li><a href="#events">Events</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#book">Book a Place</a></li>
-    <li><a href="#donate">Donate</a></li>
+    <li><a href="#what">What we are</a></li>
+    <li><a href="#work">Work with us</a></li>
+    <li><a href="#connect">Stay connected</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <span class="hero-eyebrow">A Creative Studio & Events Space — Glasgow</span>
   <h1 class="hero-title">
     We Are<br>
     <em>Curious</em><br>
     Dreamers.
   </h1>
-  <p class="hero-sub">Talks, performances, screenings, and creative experiments that bring people together.</p>
-  <div class="hero-ctas">
-    <a href="#events" class="btn-primary">Explore Events</a>
-    <a href="#about" class="btn-ghost">Our Story</a>
-  </div>
-  <div class="float-elements">
-    <div class="float-el"></div>
-    <div class="float-el"></div>
-    <div class="float-el"></div>
-    <div class="float-el"></div>
-  </div>
+  <p class="hero-sub">Curiosity as a practice. Openness as a method. Where technology meets psychology, neuroscience meets creativity, and art meets human connection. A gathering of like minds.</p>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll</span>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>Talks</span><span>//</span>
-    <span>Live Performance</span><span>//</span>
-    <span>Screenings</span><span>//</span>
-    <span>Workshops</span><span>//</span>
-    <span>Fireside Chats</span><span>//</span>
-    <span>Music</span><span>//</span>
-    <span>Free to Attend</span><span>//</span>
-    <span>Curious Minds Welcome</span><span>//</span>
-    <span>Talks</span><span>//</span>
-    <span>Live Performance</span><span>//</span>
-    <span>Screenings</span><span>//</span>
-    <span>Workshops</span><span>//</span>
-    <span>Fireside Chats</span><span>//</span>
-    <span>Music</span><span>//</span>
-    <span>Free to Attend</span><span>//</span>
-    <span>Curious Minds Welcome</span><span>//</span>
-  </div>
-</div>
-
-<!-- LAUNCH EVENT: DISTANCE TO THE MOON -->
-<section class="launch-event">
-  <div class="launch-inner">
-    <div class="launch-artwork">
-      <img src="public%20/Whale_frame_0030.png" alt="Distance to the Moon — Whale">
+<!-- DISTANCE TO THE MOON -->
+<section class="album-section">
+  <div class="album-inner">
+    <div class="album-artwork">
+      <img src="public%20/Whale_frame_0030.png" alt="Distance to the Moon">
     </div>
-    <div class="launch-content">
-      <span class="section-label">Launch Event</span>
-      <h2 class="launch-title">Distance to the Moon</h2>
-      <p class="launch-desc">Launching the soundtrack album — a film screening with live score, Q&A, drinks and networking. The first We Are Curious Dreamers event, with many more to follow.</p>
-      <div class="launch-meta">
-        <div class="meta-item">
-          <span class="meta-label">Date</span>
-          <span class="meta-value">TBC</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Location</span>
-          <span class="meta-value">Curious Dreamers Studio, Glasgow</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Admission</span>
-          <span class="meta-value">Free</span>
-        </div>
+    <div class="album-content">
+      <span class="section-label">Now Available</span>
+      <h2 class="album-title">Distance to the Moon — Original Soundtrack Out Now</h2>
+      <div class="album-body">
+        <p>Inspired by Italo Calvino's Cosmicomics, Distance to the Moon began as a surreal orchestral suite. Wide, dreamlike, slightly strange. A musical response to the idea of reaching for something vast and impossible.</p>
+        <p>Over time, the project evolved into a beautiful and profound stop motion animation film. The film reshaped the score. What started as something expansive became more intimate and personal. The final award-winning soundtrack centres on a fragile felt piano theme, subtle textures, and a sense of memory suspended in space.</p>
+        <p>The original soundtrack album is now available on all major streaming platforms.</p>
+        <p>We have also created an immersive website where you can experience the music in a deeper, more reflective way.</p>
+        <p>If you have followed the journey, thank you. If you are discovering it now, we hope you step inside.</p>
       </div>
-      <p class="launch-urgency">Places are very limited — be sure to sign up quickly.</p>
-      <a href="#book" class="btn-primary">Reserve Your Place</a>
+      <div class="album-ctas">
+        <a href="https://distancetothemoonfilm.com" class="btn-primary" target="_blank" rel="noopener">Experience the film</a>
+        <a href="https://orcd.co/tdttmost" class="btn-ghost" target="_blank" rel="noopener">Listen to the soundtrack</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- EVENTS DIARY -->
-<section class="events-section" id="events">
-  <div class="events-header">
-    <div>
-      <span class="section-label">What's On</span>
-      <h2 class="section-title">The Diary</h2>
-    </div>
-    <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--mid-gray);max-width:300px;line-height:1.8;">All events are free to attend. Your donations keep the programme alive.</p>
-  </div>
-  <div class="events-grid">
-
-    <!-- Event 1 -->
-    <div class="event-card">
-      <span class="event-free-badge">Free</span>
-      <div class="event-date-block">
-        <span class="event-day">TBC</span>
-        <div class="event-month-year">
-          <span class="event-month">Spring</span>
-          <span class="event-year">2025</span>
-        </div>
-      </div>
-      <div class="event-type">Launch / Screening</div>
-      <h3 class="event-name">Distance to the Moon</h3>
-      <p class="event-desc">Launching the soundtrack album — film screening with live score, Q&A, drinks and networking. Our first event, with many more to follow.</p>
-      <div class="event-footer">
-        <span class="event-location">Curious Dreamers Studio</span>
-        <a href="#book" class="event-cta">Book</a>
-      </div>
-    </div>
-
-    <!-- Event 2 -->
-    <div class="event-card">
-      <span class="event-free-badge">Free</span>
-      <div class="event-date-block">
-        <span class="event-day">TBC</span>
-        <div class="event-month-year">
-          <span class="event-month">Summer</span>
-          <span class="event-year">2025</span>
-        </div>
-      </div>
-      <div class="event-type">Talk / Event Night</div>
-      <h3 class="event-name">Brave // Broken</h3>
-      <p class="event-desc">Men's health, creativity, and the science of the brain. Talks, music, and honest conversations with leading voices.</p>
-      <div class="event-footer">
-        <span class="event-location">Curious Dreamers Studio</span>
-        <a href="#book" class="event-cta">Book</a>
-      </div>
-    </div>
-
-    <!-- Event 3 -->
-    <div class="event-card">
-      <span class="event-free-badge">Free</span>
-      <div class="event-date-block">
-        <span class="event-day">TBC</span>
-        <div class="event-month-year">
-          <span class="event-month">Autumn</span>
-          <span class="event-year">2025</span>
-        </div>
-      </div>
-      <div class="event-type">Workshop</div>
-      <h3 class="event-name">Sound & Story</h3>
-      <p class="event-desc">A hands-on creative workshop exploring how music and narrative shape our experience of the world. Open to all levels.</p>
-      <div class="event-footer">
-        <span class="event-location">Curious Dreamers Studio</span>
-        <a href="#book" class="event-cta">Book</a>
-      </div>
-    </div>
-
-    <!-- Event 4 -->
-    <div class="event-card">
-      <span class="event-free-badge">Free</span>
-      <div class="event-date-block">
-        <span class="event-day">TBC</span>
-        <div class="event-month-year">
-          <span class="event-month">Autumn</span>
-          <span class="event-year">2025</span>
-        </div>
-      </div>
-      <div class="event-type">Fireside Chat</div>
-      <h3 class="event-name">The Creative Mind</h3>
-      <p class="event-desc">An intimate conversation with makers, artists, and scientists on the nature of imagination and the creative process.</p>
-      <div class="event-footer">
-        <span class="event-location">Curious Dreamers Studio</span>
-        <a href="#book" class="event-cta">Book</a>
-      </div>
-    </div>
-
-    <!-- Event 5 -->
-    <div class="event-card">
-      <span class="event-free-badge">Free</span>
-      <div class="event-date-block">
-        <span class="event-day">TBC</span>
-        <div class="event-month-year">
-          <span class="event-month">Winter</span>
-          <span class="event-year">2025</span>
-        </div>
-      </div>
-      <div class="event-type">Performance</div>
-      <h3 class="event-name">Live & Electric</h3>
-      <p class="event-desc">A night of live music, spoken word, and audio-visual performance from emerging and established Scottish artists.</p>
-      <div class="event-footer">
-        <span class="event-location">Curious Dreamers Studio</span>
-        <a href="#book" class="event-cta">Book</a>
-      </div>
-    </div>
-
-    <!-- Event 6 — More coming -->
-    <div class="event-card" style="display:flex;align-items:center;justify-content:center;min-height:250px;border:1px dashed rgba(245,168,0,0.2);">
-      <div style="text-align:center;">
-        <div style="font-family:var(--font-impact);font-size:4rem;color:rgba(245,168,0,0.2);line-height:1;">MORE</div>
-        <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.25em;color:var(--mid-gray);text-transform:uppercase;margin-top:0.5rem;">More events announced soon</div>
-        <a href="#newsletter" style="display:inline-block;margin-top:1.5rem;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Get Notified →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- MANIFESTO / ABOUT -->
-<section class="manifesto" id="about">
+<!-- WHAT WE ARE -->
+<section class="manifesto-section" id="what">
   <div class="manifesto-inner">
-    <div class="manifesto-left">
-      <p class="manifesto-quote">"reimagining what a creative studio can be."</p>
-      <p class="manifesto-attribution">— We Are Curious Dreamers</p>
-    </div>
-    <div class="manifesto-right">
-      <span class="section-label">Who We Are</span>
-      <p class="manifesto-body">We Are Curious Dreamers is a <strong>creative studio and event space</strong> for curious minds, where music, film, digital technology, and imagination come together.</p>
-      <p class="manifesto-body">Founded by BAFTA-nominated producer/director <strong>Sacha Kyle</strong> and award-winning composer <strong>Giles Lamb</strong>, we curate experiences that spark dialogue, nourish the human spirit, and explore how creativity can heal, connect, and inspire.</p>
-      <p class="manifesto-body">Our events are <strong>free to attend</strong> — because we believe that culture and conversation should be open to everyone. Contributions from our community help us grow the programme, improve the space, and develop new creative projects.</p>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-icon">◉</div>
-          <div class="pillar-name">Discovery</div>
-          <div class="pillar-desc">Talks, screenings, and demonstrations that open new worlds of thought and possibility.</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">◎</div>
-          <div class="pillar-name">Connection</div>
-          <div class="pillar-desc">Fireside chats and discussions designed to bring people together in shared experience.</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">◈</div>
-          <div class="pillar-name">Creation</div>
-          <div class="pillar-desc">Workshops and collaborative sessions that invite you to make, experiment, and play.</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">◇</div>
-          <div class="pillar-name">Innovation</div>
-          <div class="pillar-desc">A living laboratory where music, film, neuroscience, and technology converge.</div>
-        </div>
-      </div>
+    <span class="section-label">What we are</span>
+    <div class="manifesto-body">
+      <p>Curiosity as a practice. Openness as a method. Process over product. Where technology meets psychology, neuroscience meets creativity, art meets human connection. A space for inquiry, sharing, discovery. A gathering of like minds — emergent, non-committal, like a movement of people who listen.</p>
     </div>
   </div>
 </section>
 
-<!-- BOOKING + DONATE -->
-<section class="booking-section" id="book">
-  <div class="booking-inner">
-    <div>
-      <span class="section-label" style="color:var(--deep-gold);">Reserve Your Place</span>
-      <h2 class="booking-title">Join Us. It's <em>Free.</em></h2>
-      <p class="booking-desc">All Curious Dreamers events are free to attend. Register below to secure your spot and we'll be in touch with all the details.</p>
-      <div class="modal-form">
-        <div class="form-group">
-          <label class="form-label">Your Name</label>
-          <input type="text" class="form-input" placeholder="How shall we address you?">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Which Event?</label>
-          <select class="form-select">
-            <option value="">Select an event…</option>
-            <option>Distance to the Moon — Launch Screening</option>
-            <option>Brave // Broken — Talk & Music Night</option>
-            <option>Sound & Story — Workshop</option>
-            <option>The Creative Mind — Fireside Chat</option>
-            <option>Live & Electric — Performance Night</option>
-            <option>Notify me of all events</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Number of Guests (inc. yourself)</label>
-          <input type="number" class="form-input" placeholder="1" min="1" max="6">
-        </div>
-        <button class="btn-dark">Reserve My Place</button>
-        <p class="free-note">✦ Events are free · Donations are always welcome</p>
-      </div>
-    </div>
-
-    <!-- DONATE -->
-    <div id="donate">
-      <div class="donate-panel">
-        <div class="donate-title">Support the Dream</div>
-        <p class="donate-desc">Every contribution goes directly back into the programme — better equipment, more events, and exciting new projects. Thank you.</p>
-        <div class="donate-amounts">
-          <div class="donate-amount" onclick="setDonate(this, '5')">£5</div>
-          <div class="donate-amount active" onclick="setDonate(this, '10')">£10</div>
-          <div class="donate-amount" onclick="setDonate(this, '25')">£25</div>
-        </div>
-        <div class="donate-impact" id="donateImpact">£10 helps us record and share one event online</div>
-        <div class="donate-custom">
-          <span class="donate-prefix">£</span>
-          <input type="number" class="donate-input" placeholder="Your own amount" id="donateCustom">
-        </div>
-        <button class="btn-primary" style="width:100%;text-align:center;display:block;">Donate with Card</button>
-        <p style="font-family:var(--font-mono);font-size:0.55rem;color:rgba(242,237,228,0.3);text-align:center;margin-top:1rem;letter-spacing:0.1em;">Secure payment via Stripe · You can also donate in person at the studio</p>
-      </div>
-    </div>
+<!-- WORK WITH US -->
+<section class="work-section" id="work">
+  <div class="work-inner">
+    <span class="section-label">Work with us</span>
+    <p class="work-body">If you're working on something that needs music, sound, creative direction, immersive experience, or visual storytelling — or if you simply want to talk — we'd love to hear from you.</p>
+    <p class="work-email"><a href="mailto:hello@wearecuriousdreamers.com">hello@wearecuriousdreamers.com</a></p>
   </div>
 </section>
 
-<!-- PARTNERSHIP NOTE -->
-<section style="background:var(--black);padding:4rem 3rem;border-top:1px solid rgba(255,255,255,0.05);">
-  <div style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
-    <div>
-      <span class="section-label">Partners & Sponsors</span>
-      <h3 style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;line-height:1;margin-bottom:1.5rem;">Help Us Build Something<br><em style="font-style:italic;color:var(--gold);">Remarkable.</em></h3>
-      <p style="font-family:var(--font-mono);font-size:0.7rem;line-height:1.9;color:var(--mid-gray);margin-bottom:2rem;">We offer partnership and sponsorship opportunities for organisations who share our vision of making culture, creativity, and conversation accessible to all. From headline partnerships to community supporters, there's a way to be part of this.</p>
-      <a href="mailto:hello@wearecuriousdreamers.com" class="btn-ghost">Discuss a Partnership</a>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);">
-      <div style="background:var(--dark-gray);padding:2rem;text-align:center;">
-        <div style="font-family:var(--font-impact);font-size:2.5rem;color:var(--gold);">£15k+</div>
-        <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid-gray);margin-top:0.5rem;">Headline Partner</div>
-      </div>
-      <div style="background:var(--dark-gray);padding:2rem;text-align:center;">
-        <div style="font-family:var(--font-impact);font-size:2.5rem;color:var(--gold);">£10k+</div>
-        <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid-gray);margin-top:0.5rem;">Principal Partner</div>
-      </div>
-      <div style="background:var(--dark-gray);padding:2rem;text-align:center;">
-        <div style="font-family:var(--font-impact);font-size:2.5rem;color:var(--gold);">£7k+</div>
-        <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid-gray);margin-top:0.5rem;">Series Partner</div>
-      </div>
-      <div style="background:var(--dark-gray);padding:2rem;text-align:center;">
-        <div style="font-family:var(--font-impact);font-size:2.5rem;color:var(--gold);">£5k+</div>
-        <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid-gray);margin-top:0.5rem;">Supporter</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-  <span class="section-label" style="color:rgba(0,0,0,0.5);">Stay Curious</span>
-  <h2 class="newsletter-title">Be First to Know.</h2>
-  <p class="newsletter-sub">New events, projects, and ideas — delivered to your inbox.</p>
-  <div class="newsletter-form">
-    <input type="email" class="newsletter-input" placeholder="your@email.com">
-    <button class="newsletter-btn">Get Notified</button>
+<!-- STAY CONNECTED -->
+<section class="connect-section" id="connect">
+  <div class="connect-inner">
+    <span class="section-label">Stay connected</span>
+    <p class="connect-body">New projects and ideas — delivered gently to your inbox.</p>
+    <form class="connect-form" action="#" method="post">
+      <input type="email" class="connect-input" placeholder="your@email.com" required>
+      <button type="submit" class="connect-btn">Subscribe</button>
+    </form>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div>
-      <div class="footer-brand-name">We Are Curious Dreamers.</div>
-      <p class="footer-tagline">A creative studio and event space for curious minds where music, film, digital technology and imagination come together.</p>
-      <p style="font-family:var(--font-mono);font-size:0.6rem;color:rgba(136,136,136,0.5);">hello@wearecuriousdreamers.com</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Events</div>
-      <ul class="footer-links">
-        <li><a href="#">Distance to the Moon</a></li>
-        <li><a href="#">Brave // Broken</a></li>
-        <li><a href="#">Sound & Story</a></li>
-        <li><a href="#">All Events</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">About</div>
-      <ul class="footer-links">
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Sacha Kyle</a></li>
-        <li><a href="#">Giles Lamb</a></li>
-        <li><a href="#">Partnerships</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Connect</div>
-      <ul class="footer-links">
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Newsletter</a></li>
-        <li><a href="#">Donate</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2025 We Are Curious Dreamers. All rights reserved.</span>
-    <span class="footer-copy" style="color:var(--gold);font-size:0.55rem;">Glasgow, Scotland</span>
+    <p class="footer-names">Sacha Kyle &amp; Giles Lamb</p>
+    <p class="footer-location">Glasgow</p>
+    <p class="footer-children">Looking for our children's animation work? <a href="https://curiousdreamers.com" target="_blank" rel="noopener">Visit curiousdreamers.com</a></p>
   </div>
 </footer>
 
@@ -1560,7 +565,6 @@
     cursor.style.top = mouseY + 'px';
   });
 
-  // Smooth ring follow
   function animateRing() {
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
@@ -1570,8 +574,7 @@
   }
   animateRing();
 
-  // Hover effects on interactive elements
-  document.querySelectorAll('a, button, .donate-amount, .event-card, .speaker-card').forEach(el => {
+  document.querySelectorAll('a, button, input[type="email"]').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('hover');
       cursorRing.classList.add('hover');
@@ -1581,19 +584,6 @@
       cursorRing.classList.remove('hover');
     });
   });
-
-  // Donate amount selector
-  const impacts = {
-    '5': '£5 helps cover materials for one workshop',
-    '10': '£10 helps us record and share one event online',
-    '25': '£25 supports an artist or speaker fee contribution',
-  };
-
-  function setDonate(el, val) {
-    document.querySelectorAll('.donate-amount').forEach(d => d.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('donateImpact').textContent = impacts[val] || '£' + val + ' — thank you!';
-  }
 
   // Scroll reveal
   const observer = new IntersectionObserver(entries => {
@@ -1605,7 +595,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.event-card, .speaker-card, .pillar, .manifesto-body').forEach(el => {
+  document.querySelectorAll('.album-content, .manifesto-body, .work-body, .work-email, .connect-body').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
